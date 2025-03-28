@@ -9,19 +9,20 @@ export const login = async (req: Request, res: Response) => {
     const { username, password } = req.body;
     const user = await User.findOne({ where: {username } });
   if (!user) {
-    return res.status(404).json({ message: 'user not found' }); 
+     res.status(404).json({ message: 'user not found' }); 
+  } else {
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+       res.status(401).json({ message: 'invalid password' });
+    }
+  
+    const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET_KEY as string, {
+      expiresIn: '1h',
+    });
+  
+    res.json ({ token });
   }
 
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-  if (!isPasswordValid) {
-    return res.status(401).json({ message: 'invalid password' });
-  }
-
-  const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET_KEY as string, {
-    expiresIn: '1h',
-  });
-
-  res.json ({ token });
 } catch (error) {
   console.error(error);
   res.status(500).json({ message: 'Internal server error' })
