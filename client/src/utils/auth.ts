@@ -15,16 +15,22 @@ class AuthService {
 
   getToken(): string {
     // TODO: return the token
+    const loggedUser = localStorage.getItem('id_token') || '';
+    return loggedUser;
   }
 
   login(idToken: string) {
     // TODO: set the token to localStorage
     // TODO: redirect to the home page
+    localStorage.setItem('id_token', idToken);
+    window.location.assign('/');
   }
 
   logout() {
     // TODO: remove the token from localStorage
     // TODO: redirect to the login page
+    localStorage.removeItem('id_token');
+    window.location.assign('/');
   }
 }
 
