@@ -20,7 +20,7 @@ const token = data.token;
 
 // call the login method from auth.ts file
 
-// auth.login(token)
+auth.login(token)
 
 
 }
