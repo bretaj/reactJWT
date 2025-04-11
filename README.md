@@ -2,7 +2,7 @@
 
 This application utilizes React with JWT authentication to access a KanBan board
 
-[deployed app](https://reactjwt.onrender.com/login)
+[deployed app](https://reactjwt.onrender.com)
 
 ![screenshot of app](reactjwtscreenshot1.png)
 ![other screenshot of app](reactjwtscreenshot2.png)
