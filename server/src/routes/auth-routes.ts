@@ -15,12 +15,14 @@ export const login = async (req: Request, res: Response) => {
     if (!isPasswordValid) {
        res.status(401).json({ message: 'invalid password' });
     }
-  
-    const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET_KEY as string, {
-      expiresIn: '1h',
-    });
-  
-    res.json ({ token });
+    else {
+      const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET_KEY as string, {
+        expiresIn: '1h',
+      });
+    
+      res.json ({ token });
+    }
+
   }
 
 } catch (error) {

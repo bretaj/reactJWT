@@ -13,7 +13,9 @@ const login = async (userInfo: UserLogin) => {
     },
     body: JSON.stringify(userInfo)
   })
-
+  if(!response.ok) {
+    throw new Error('Error logging in!');
+  }
   const data = await response.json();
 
   const token = data.token;
